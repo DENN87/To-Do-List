@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <title>My To Do List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <style>
+            .dot-High {
+                height: 1rem;
+                width: 1rem;
+                background-color: rgb(255, 0, 0);
+                border-radius: 50%;
+                display:inline-block;
+            }
+            .dot-Low {
+                height: 1rem;
+                width: 1rem;
+                background-color: rgb(255, 187, 0);
+                border-radius: 50%;
+                display:inline-block;
+            }    
+    </style>
+</head>    
+<body>
+<div class="containter-fluid border" style="padding: 5%">
+<!--Main div - wraps entire window-->
+    <!--TO DO LIST CARD BEGIN-->
+    <div class="card text-white bg-primary containter-fluid" style="padding-bottom:1rem">
+        <div class="card-header text-center" style="font-size: 150%"><strong>T O &nbsp D O &nbsp L I S T</strong></div>
+        <div class="card-body bg-white">
+            <!--BEGIN - INPUT DROP DOWN ADD TO LIST Fields-->
+                <form class="needs-validation" novalidate>
+                    <div class="form-row m-0 p-0">
+                        <div class="col-md-8 m-0 p-1">
+                            <input id="myInput" type="text" class="form-control border-primary" placeholder="Type your to do note ..." required>
+                            <div class="invalid-feedback">
+                            Please input your To Do item.
+                            </div>
+                        </div>
+                        <div class="col-md-2 m-0 p-1">
+                                <select id="selectP" class="btn btn-primary border-primary custom-select" required>
+                                        <option  value="">Select Priority</option>
+                                        <option  value="1" class="dot-High">&nbsp High Priority</option>
+                                        <option  value="2" class="dot-Low">&nbsp Low Priority</option>
+                                </select>
+                            <div class="invalid-feedback">
+                            Please select priority.
+                            </div>
+                        </div>
+                </form>
+                        <div class="col-md-2 m-0 p-1">
+                            <button id="addToListBTtn" type="submit" class="btn btn-primary border-left-0 rounded-right w-100">Add To List</button>
+                        </div>
+                    </div>
+                
+            <!--END - INPUT DROP DOWN ADD TO LIST Fields-->
+            <div class="card-group mt-4">
+                <!--FIRST BEGIN COLOMN-->
+                <div class="card border-0 p-1">
+                    <div class="card border-0"  style="padding:0 0 0 0">
+                        <div class="card-header rounded text-center border border-primary border-bottom-0 text-white bg-primary"><strong>T o D o</strong></div>
+                        <div class="card-body mt-3"  style="padding:0 0 0 0">
+                                <!--Here BEGIN TO DO ul List-->
+                                <ul id="todoList" class="list-group list-group-flush">
+
+                                </ul>
+                                <!--Here ENDS TO DO ul List-->
+                        </div>
+                    </div>
+                </div>
+                <!--FIRST ENDS COLOMN-->
+                <!--SECOND BEGIN COLOMN-->
+                <div class="card border-0 p-1">
+                    <div class="card border-0"  style="padding:0 0 0 0">
+                        <div class="card-header rounded text-center border border-success border-bottom-0 text-white bg-success"><strong>D o n e</strong></div>
+                        <div class="card-body mt-3"  style="padding:0 0 0 0">
+                                <!--Here BEGIN DONE ul List-->
+                                <ul id="doneList" class="list-group list-group-flush">
+                                    
+                                </ul>
+                                <!--Here ENDS DONE ul List-->
+                        </div>
+                    </div>
+                </div>
+                <!--SECOND ENDS COLOMN-->
+            </div>
+            <div id="summaryTab" class="col text-primary text-center border-primary mt-2 border-top" style="display: none">
+                <div class="row mt-3">
+                    <div class="col text-center border-primary border-bottom-0 border-right-0 border-left-0 rounded-top mr-5 ml-5" style="border: 1px solid #eee; border-top-width: 0.25rem;">
+                        <p id="highNrTODO" class="text-danger"></p></li>
+                        <p id="lowNrTODO" class="text-warning"></p></li>
+                    </div>
+                    <div class="col text-center border-success border-bottom-0 border-right-0 border-left-0 rounded-top mr-5 ml-5" style="border: 1px solid #eee; border-top-width: 0.25rem;">
+                            <p id="highNrDONE" class="text-danger"></p></li>
+                            <p id="lowNrDONE" class="text-warning"></p></li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--TO DO LIST CARD ENDS-->
+<!--Main div - wraps entire window-->
+</div>
+<!--BEGIN SCRIPT JQUERY-->
+<script src="to-do.js"></script>
+<!--END SCRIPT JQUERY-->
+</body>
+</html>
+
